@@ -7,12 +7,14 @@ import { HomeComponent } from './home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule } from './materials';
 import { PlayComponent } from './play/play.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PlayComponent
+    PlayComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,

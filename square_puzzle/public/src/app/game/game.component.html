@@ -1,0 +1,43 @@
+<div class="row mt-4 ml-4 mr-4 mb-4" id="top">
+    <div class="col-2">
+        <button [routerLink]="['/play']" mat-flat-button color="primary">Back</button>
+    </div>
+    <div class="col-8 text-center">
+        <h3 *ngIf="clicks != 1">{{clicks}} clicks</h3>
+        <h3 *ngIf="clicks == 1">{{clicks}} click</h3>
+    </div>
+    <div class="col-2 text-right">
+        <button mat-flat-button color="primary">History</button>
+    </div>
+</div>
+
+<div id="body">
+    <mat-grid-list [cols]="WIDTH" class="container" [rowHeight]="rowHeight">
+        <div *ngFor="let horizontal of map; let i = index">
+            <div *ngFor="let vertical of horizontal; let j = index">
+                <mat-grid-tile *ngIf="vertical == 0" class="form-control bg-primary"
+                    (click)="onButtonClick((i * horizontal.length) + j)">
+                </mat-grid-tile>
+                <mat-grid-tile *ngIf="vertical == 1" class="form-control bg-danger"
+                    (click)="onButtonClick((i * horizontal.length) + j)">
+                </mat-grid-tile>
+                <!-- <button *ngIf="vertical == 1" class="form-control bg-danger"
+                (click)="onButtonClick((i * horizontal.length) + j)"></button> -->
+            </div>
+        </div>
+    </mat-grid-list>
+</div>
+
+
+
+<div class="row ml-4 mr-4 mt-4" id="bottom">
+    <div class="col">
+        <button [routerLink]="['/play']" mat-flat-button color="primary">Back</button>
+    </div>
+    <div class="col text-center">
+        <button mat-flat-button color="primary" (click)="refreshPage()">Reset</button>
+    </div>
+    <div class="col text-right">
+        <button mat-flat-button color="primary">Next</button>
+    </div>
+</div>
