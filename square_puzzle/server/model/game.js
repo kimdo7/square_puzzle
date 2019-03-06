@@ -7,7 +7,8 @@ var GameSchema = new mongoose.Schema({
     attempted: { type: Number, required: true, default: 0 },
     solved: { type: Number, required: true, default: 0 },
     best: { type: Number, required: true, default: 0 },
-    clicks: [{ type: Number }]
+    clicks: [{ type: Number }],
+    level: {type: Number, required: true, unique: true}
 }, { timestamps: true, upsert: true })
 
 mongoose.model('Game', GameSchema);

@@ -1,13 +1,16 @@
-<div class="row mt-4 ml-4 mr-4 mb-4" id="top">
-    <div class="col">
-        <h3>High Score: {{gameObj.best}}</h3>
-    </div>
-    <div class="col text-center">
-        <h3 *ngIf="clicks != 1">{{clicks}} clicks</h3>
-        <h3 *ngIf="clicks == 1">{{clicks}} click</h3>
-    </div>
-    <div class="col text-right">
-            <h3>Solved / Attempted: {{gameObj.solved}} / {{gameObj.attemtped}}</h3>
+<div class="container">
+    <div class="row mt-4 ml-4 mr-4 mb-4" id="top">
+        <div class="col">
+            <h3 *ngIf="gameObj.best != 0">High Score: {{gameObj.best}}</h3>
+            <h3 *ngIf="gameObj.best == 0">High Score: N/A</h3>
+        </div>
+        <div class="col text-center">
+            <h3 *ngIf="clicks != 1">{{clicks}} clicks</h3>
+            <h3 *ngIf="clicks == 1">{{clicks}} click</h3>
+        </div>
+        <div class="col text-right">
+            <h3>S/A: {{gameObj.solved}}/{{gameObj.attemtped}}</h3>
+        </div>
     </div>
 </div>
 

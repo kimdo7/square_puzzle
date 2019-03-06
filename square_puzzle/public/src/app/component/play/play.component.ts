@@ -19,36 +19,30 @@ export interface GameData {
 })
 export class PlayComponent implements OnInit {
 
-    displayedColumns: string[] = ['id', 'name', 'attemtped', 'solved'];
+    displayedColumns: string[] = ['name', 'attemtped', 'solved', 'best'];
     dataSource: MatTableDataSource<GameData>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(private _httpService: HttpService) {
-        let tempObservable = _httpService.getGames()
+        let tempObservable = this._httpService.getGames()
         tempObservable.subscribe(data => {
-            const games = data["data"].reduce((games, game) =>{
+            const games = data["data"].reduce((games, game) => {
                 games.push(createGame(game))
                 return games
             }, [])
-            
+
             this.dataSource = new MatTableDataSource(games);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
         });
     }
 
     ngOnInit() {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+
     }
 
-    applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
-        }
-    }
 }
 
 /** Builds and returns a new User. */

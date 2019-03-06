@@ -22,7 +22,7 @@ export class GameComponent implements OnInit {
 
     public WIDTH = 3
     public HEIGHT = 1
-    public gameObj : GameData = createDefaultGame()
+    public gameObj: GameData = createDefaultGame()
     public map = []
     public rowHeight = ""
     public clicks = 0
@@ -32,19 +32,23 @@ export class GameComponent implements OnInit {
 
     ngOnInit() {
         this._route.params.subscribe((params: Params) => {
-            let tempObservable = this._httpService.getGame(params["id"])
-            tempObservable.subscribe(data => {
-                this.gameObj = createGame(data["data"][0])
-                this._alocation(this.gameObj.width, this.gameObj.height)
-            });
+            this._getGame(params["id"])
         })
     }
 
-    _alocation(width: number, height: number) {
+    _getGame(id) {
+        let tempObservable = this._httpService.getGame(id)
+        tempObservable.subscribe(data => {
+            this.gameObj = createGame(data["data"][0])
+            this._alocation(this.gameObj.width, this.gameObj.height)
+        });
+    }
 
+    _alocation(width: number, height: number) {
         this.WIDTH = width
         this.HEIGHT = height
 
+        this.map = []
         for (var i = 0; i < this.HEIGHT; i++) {
             var temp = []
             for (var j = 0; j < this.WIDTH; j++)
@@ -84,7 +88,7 @@ export class GameComponent implements OnInit {
 
         this.clicks++
 
-        if (this.isWining()){
+        if (this.isWining()) {
             alert("Congrats, Let's move on the next challenge!!!")
             let tempObservable = this._httpService.solvedGame(this.gameObj.id, this.clicks)
             tempObservable.subscribe(data => {
@@ -106,7 +110,8 @@ export class GameComponent implements OnInit {
     }
 
     refreshPage() {
-        location.reload()
+        // location.reload()
+        this._getGame(this.gameObj.id)
     }
 
 }
