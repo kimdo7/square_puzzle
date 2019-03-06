@@ -2,16 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import * as $ from 'jquery';
 import { HttpService } from 'src/app/service/http.service';
-
-export interface GameData {
-    id: string;
-    attemtped: number;
-    solved: number;
-    best: number;
-    width: number;
-    height: number;
-    name: string;
-}
+import { GameData } from 'src/app/interface/gameData';
 
 @Component({
     selector: 'app-game',
@@ -118,6 +109,7 @@ export class GameComponent implements OnInit {
 
 function createGame(object: object): GameData {
     return {
+        level: object["number"],
         id: object["_id"],
         attemtped: object["attempted"],
         solved: object["solved"],
@@ -130,6 +122,7 @@ function createGame(object: object): GameData {
 
 function createDefaultGame(): GameData {
     return {
+        level: 0,
         id: "",
         attemtped: 0,
         solved: 0,

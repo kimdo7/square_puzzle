@@ -20,4 +20,8 @@ export class HttpService {
     solvedGame(id, clicks) {
         return this._http.get('/solvedById/' + id + "/" + clicks);
     }
+
+    createGame(game){
+        return this._http.post("/game", game)
+    }
 }

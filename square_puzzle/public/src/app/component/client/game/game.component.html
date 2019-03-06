@@ -24,8 +24,6 @@
                 <mat-grid-tile *ngIf="vertical == 1" class="form-control bg-danger"
                     (click)="onButtonClick((i * horizontal.length) + j)">
                 </mat-grid-tile>
-                <!-- <button *ngIf="vertical == 1" class="form-control bg-danger"
-                (click)="onButtonClick((i * horizontal.length) + j)"></button> -->
             </div>
         </div>
     </mat-grid-list>
@@ -35,7 +33,7 @@
 
 <div class="row ml-4 mr-4 mt-4" id="bottom">
     <div class="col">
-        <button [routerLink]="['/play']" mat-flat-button color="primary">Back</button>
+        <button [routerLink]="['/gameList']" mat-flat-button color="primary">Back</button>
     </div>
     <div class="col text-center">
         <button mat-flat-button color="primary" (click)="refreshPage()">Reset</button>

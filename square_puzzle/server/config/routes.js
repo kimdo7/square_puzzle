@@ -11,7 +11,6 @@ module.exports = function (app) {
     })
 
     app.get("/solvedById/:id/:clicks", function (req, res) {
-        console.log("test************************************")
         games.solvedById(req, res)
     })
 

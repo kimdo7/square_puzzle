@@ -1,3 +1,46 @@
-<p>
-  game-detail works!
-</p>
+<div class="container">
+    <form (submit)="onSubmit()">
+        <p> {{ newGame | json }} </p>
+        <div class=" row">
+            <div class="col">
+                <mat-form-field class="w-100">
+                    <input type="number" matInput placeholder="Width" [(ngModel)]="newGame.width" name="newGame.width"
+                        required>
+                    <mat-error *ngIf="isWidthInputValid()">tao lao</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field class="w-100">
+                    <input type="number" matInput placeholder="Height" [(ngModel)]="newGame.height"
+                        name="newGame.height" required>
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field class="w-100">
+                    <input type="text" matInput placeholder="Clicks" [(ngModel)]="newGame.clicks" name="newGame.clicks">
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <button type="submit" mat-raised-button color="primary" class="fixed-bottom">Create Game</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<div id="body">
+    <mat-grid-list [cols]="this.newGame.width" class="container" rowHeight='50px'> 
+        <div *ngFor="let horizontal of map; let i = index">
+            <div *ngFor="let vertical of horizontal; let j = index">
+                <mat-grid-tile *ngIf="vertical == 0" class="form-control bg-primary"
+                    (click)="onButtonClick((i * horizontal.length) + j)">
+                </mat-grid-tile>
+                <mat-grid-tile *ngIf="vertical == 1" class="form-control bg-danger"
+                    (click)="onButtonClick((i * horizontal.length) + j)">
+                </mat-grid-tile>
+            </div>
+        </div>
+    </mat-grid-list>
+</div>

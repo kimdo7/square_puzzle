@@ -1,23 +1,14 @@
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpService } from 'src/app/service/http.service';
-
-export interface GameData {
-    id: string;
-    attemtped: number;
-    solved: number;
-    best: number;
-    width: number;
-    height: number;
-    name: string;
-}
+import { GameData } from 'src/app/interface/gameData';
 
 @Component({
     selector: 'app-play',
-    templateUrl: './play.component.html',
-    styleUrls: ['./play.component.css']
+    templateUrl: './gameList.component.html',
+    styleUrls: ['./gameList.component.css']
 })
-export class PlayComponent implements OnInit {
+export class GameListComponent implements OnInit {
 
     displayedColumns: string[] = ['name', 'attemtped', 'solved', 'best'];
     dataSource: MatTableDataSource<GameData>;
@@ -45,9 +36,10 @@ export class PlayComponent implements OnInit {
 
 }
 
-/** Builds and returns a new User. */
+/** Builds and returns a new Game. */
 function createGame(object: object): GameData {
     return {
+        level: object["level"],
         id: object["_id"],
         attemtped: object["attempted"],
         solved: object["solved"],
