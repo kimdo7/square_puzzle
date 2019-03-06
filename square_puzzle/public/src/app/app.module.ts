@@ -7,10 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './materials';
 import { HttpService } from './service/http.service';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './component/home/home.component';
-import { PlayComponent } from './component/play/play.component';
-import { GameComponent } from './component/game/game.component';
-import { LoginComponent } from './component/login/login.component';
+import { HomeComponent } from './component/client/home/home.component';
+import { PlayComponent } from './component/client/play/play.component';
+import { GameComponent } from './component/client/game/game.component';
+import { LoginComponent } from './component/client/login/login.component';
 import {
     SocialLoginModule,
     AuthServiceConfig,

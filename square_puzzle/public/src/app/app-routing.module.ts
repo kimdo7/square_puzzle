@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './component/home/home.component';
-import { PlayComponent } from './component/play/play.component';
-import { GameComponent } from './component/game/game.component';
-import { LoginComponent } from './component/login/login.component';
+import { HomeComponent } from './component/client/home/home.component';
+import { PlayComponent } from './component/client/play/play.component';
+import { GameComponent } from './component/client/game/game.component';
+import { LoginComponent } from './component/client/login/login.component';
 import { AdminComponent } from './component/admin/admin.component';
 
 const routes: Routes = [
