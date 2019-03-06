@@ -3,20 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule } from './materials';
-import { PlayComponent } from './play/play.component';
-import { GameComponent } from './game/game.component';
 import { HttpService } from './service/http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './component/home/home.component';
+import { PlayComponent } from './component/play/play.component';
+import { GameComponent } from './component/game/game.component';
+import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PlayComponent,
-    GameComponent
+    GameComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

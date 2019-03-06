@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import * as $ from 'jquery';
-import { HttpService } from '../service/http.service';
+import { HttpService } from 'src/app/service/http.service';
 
 export interface GameData {
     id: string;

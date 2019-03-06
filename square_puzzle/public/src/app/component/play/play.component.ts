@@ -1,6 +1,6 @@
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpService } from '../service/http.service';
+import { HttpService } from 'src/app/service/http.service';
 
 export interface GameData {
     id: string;
