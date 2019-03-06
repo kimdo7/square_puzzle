@@ -1,19 +1,16 @@
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpService } from '../service/http.service';
 
-export interface UserData {
+export interface GameData {
     id: string;
+    attemtped: number;
+    solved: number;
+    best: number;
+    width: number;
+    height: number;
     name: string;
-    progress: string;
-    color: string;
 }
-
-/** Constants used to fill up our data base. */
-const COLORS: string[] = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-    'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
-const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-    'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-    'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
 
 @Component({
     selector: 'app-play',
@@ -22,17 +19,22 @@ const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
 })
 export class PlayComponent implements OnInit {
 
-    displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-    dataSource: MatTableDataSource<UserData>;
+    displayedColumns: string[] = ['id', 'name', 'attemtped', 'solved'];
+    dataSource: MatTableDataSource<GameData>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor() {
-        const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
-
-        // Assign the data to the data source for the table to render
-        this.dataSource = new MatTableDataSource(users);
+    constructor(private _httpService: HttpService) {
+        let tempObservable = _httpService.getGames()
+        tempObservable.subscribe(data => {
+            const games = data["data"].reduce((games, game) =>{
+                games.push(createGame(game))
+                return games
+            }, [])
+            
+            this.dataSource = new MatTableDataSource(games);
+        });
     }
 
     ngOnInit() {
@@ -47,19 +49,17 @@ export class PlayComponent implements OnInit {
             this.dataSource.paginator.firstPage();
         }
     }
-
 }
 
 /** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-    const name =
-        NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-        NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
+function createGame(object: object): GameData {
     return {
-        id: id.toString(),
-        name: name,
-        progress: Math.round(Math.random() * 100).toString(),
-        color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-    };
+        id: object["_id"],
+        attemtped: object["attempted"],
+        solved: object["solved"],
+        best: object["best"],
+        width: object["width"],
+        height: object["height"],
+        name: object["width"] + " by " + object["height"]
+    }
 }

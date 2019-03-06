@@ -1,13 +1,13 @@
 <div class="row mt-4 ml-4 mr-4 mb-4" id="top">
-    <div class="col-2">
-        <button [routerLink]="['/play']" mat-flat-button color="primary">Back</button>
+    <div class="col">
+        <h3>High Score: {{gameObj.best}}</h3>
     </div>
-    <div class="col-8 text-center">
+    <div class="col text-center">
         <h3 *ngIf="clicks != 1">{{clicks}} clicks</h3>
         <h3 *ngIf="clicks == 1">{{clicks}} click</h3>
     </div>
-    <div class="col-2 text-right">
-        <button mat-flat-button color="primary">History</button>
+    <div class="col text-right">
+            <h3>Solved / Attempted: {{gameObj.solved}} / {{gameObj.attemtped}}</h3>
     </div>
 </div>
 
