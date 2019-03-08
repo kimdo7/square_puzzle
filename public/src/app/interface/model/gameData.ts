@@ -7,4 +7,5 @@ export interface GameData {
     height: number;
     name: string;
     level: number;
+    clicks: string;
 }

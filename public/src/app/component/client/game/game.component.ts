@@ -53,8 +53,37 @@ export class GameComponent implements OnInit {
             this.map.push(temp)
         }
 
+        var clickList = this.gameObj.clicks.split(",")
+        for (var pos in clickList) {
+            if (clickList[pos] != "")
+                this._autoClicks(clickList[pos])
+        }
+
         $("#body").height($(window).height() - $("#top").outerHeight() - $("#bottom").outerHeight() - 100)
         this.rowHeight = $("#body").height() / this.HEIGHT + "px"
+    }
+
+    _autoClicks(pos) {
+        var y = Math.floor(pos / this.gameObj.width)
+        var x = pos % this.gameObj.width
+
+        if (x + 1 < this.gameObj.width)
+            this._click(x + 1, y)
+
+        // //check left
+        if (x - 1 >= 0)
+            this._click(x - 1, y)
+
+        // //check down
+        if (y + 1 < this.gameObj.height)
+            this._click(x, y + 1)
+
+        // //check up
+        if (y - 1 >= 0)
+            this._click(x, y - 1)
+
+        //click itself
+        this._click(x, y)
     }
 
     onButtonClick(pos) {
@@ -107,14 +136,13 @@ export class GameComponent implements OnInit {
     }
 
     refreshPage() {
-        // location.reload()
         this._getGame(this.gameObj.id)
     }
 
-    next(){
+    next() {
         let tempObservable = this._httpService.nextGame(this.gameObj.level)
         tempObservable.subscribe(data => {
-            if (data["message"] == "Success"){
+            if (data["message"] == "Success") {
                 // alert(data["data"][0]["_id"])
                 this._router.navigate(["/game", data["data"][0]["_id"]])
             }

@@ -11,7 +11,8 @@ export class GameDatas {
             best: object["best"],
             width: object["width"],
             height: object["height"],
-            name: object["width"] + " by " + object["height"]
+            name: object["width"] + " by " + object["height"],
+            clicks: object["clicks"]
         }
     }
 
@@ -24,7 +25,8 @@ export class GameDatas {
             best: 0,
             width: 0,
             height: 0,
-            name: ""
+            name: "",
+            clicks: ""
         }
     }
 }
