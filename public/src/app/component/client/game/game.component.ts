@@ -45,6 +45,7 @@ export class GameComponent implements OnInit {
         this.HEIGHT = height
 
         this.map = []
+        this.clicks = 0
         for (var i = 0; i < this.HEIGHT; i++) {
             var temp = []
             for (var j = 0; j < this.WIDTH; j++)

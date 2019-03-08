@@ -18,10 +18,18 @@
     <mat-grid-list [cols]="WIDTH" class="container" [rowHeight]="rowHeight">
         <div *ngFor="let horizontal of map; let i = index">
             <div *ngFor="let vertical of horizontal; let j = index">
-                <mat-grid-tile *ngIf="vertical == 0" class="form-control bg-primary"
+                <mat-grid-tile 
+                matRipple
+                color = "red"
+                *ngIf="vertical == 0" class="form-control bg-primary"
                     (click)="onButtonClick((i * horizontal.length) + j)">
                 </mat-grid-tile>
-                <mat-grid-tile *ngIf="vertical == 1" class="form-control bg-danger"
+
+
+                <mat-grid-tile 
+                matRipple
+                color = "blue"
+                *ngIf="vertical == 1" class="form-control bg-danger"
                     (click)="onButtonClick((i * horizontal.length) + j)">
                 </mat-grid-tile>
             </div>
