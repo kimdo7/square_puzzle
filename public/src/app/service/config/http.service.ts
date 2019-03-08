@@ -21,6 +21,12 @@ export class HttpService {
         })
     }
 
+    nextGame(level){
+        return this._http.post("/gameByLevel", {
+            "level": level+1
+        })
+    }
+
     getGames() {
         return this._http.get('/games');
         // this.games = new GameHttpService()

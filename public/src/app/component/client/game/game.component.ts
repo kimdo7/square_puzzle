@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as $ from 'jquery';
 import { GameData } from 'src/app/interface/model/gameData';
 import { GameDatas } from 'src/app/interface/controller/gameDatas';
@@ -21,7 +21,8 @@ export class GameComponent implements OnInit {
 
     constructor(
         private _route: ActivatedRoute,
-        private _httpService: HttpService) {
+        private _httpService: HttpService,
+        private _router: Router) {
     }
 
     ngOnInit() {
@@ -109,18 +110,14 @@ export class GameComponent implements OnInit {
         this._getGame(this.gameObj.id)
     }
 
+    next(){
+        let tempObservable = this._httpService.nextGame(this.gameObj.level)
+        tempObservable.subscribe(data => {
+            if (data["message"] == "Success"){
+                // alert(data["data"][0]["_id"])
+                this._router.navigate(["/game", data["data"][0]["_id"]])
+            }
+        });
+    }
+
 }
-
-// function createGame(object: object): GameData {
-//     return {
-//         level: object["number"],
-//         id: object["_id"],
-//         attemtped: object["attempted"],
-//         solved: object["solved"],
-//         best: object["best"],
-//         width: object["width"],
-//         height: object["height"],
-//         name: object["width"] + " by " + object["height"]
-//     }
-// }
-

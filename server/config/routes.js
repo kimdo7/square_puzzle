@@ -10,6 +10,10 @@ module.exports = function (app) {
         games.getByID(req, res)
     })
 
+    app.post("/gameByLevel", function (req, res) {
+        games.getByLevel(req, res)
+    })
+
     app.get("/solvedById/:id/:clicks", function (req, res) {
         games.solvedById(req, res)
     })

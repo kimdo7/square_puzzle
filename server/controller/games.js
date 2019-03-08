@@ -77,6 +77,31 @@ module.exports = {
         })
     },
 
+    getByLevel: function (req, res) {
+        console.log(req.body.level)
+        Game.find({ level: req.body.level }, function (err, data) {
+            if (err)
+                res.json({ message: "Error", error: err })
+            else {
+                data[0]["attempted"] += 1
+
+                res.json({
+                    message: "Success",
+                    title: "Get Game",
+                    data: data
+                })
+
+                /**
+                 * Update attempted to db
+                 */
+                Game.update({ _id: req.params.id }, { attempted: data[0]["attempted"] }, function (err) {
+                    if (err)
+                        console.log(err)
+                })
+            }
+        })
+    },
+
     solvedById: function (req, res) {
 
         Game.find({ _id: req.params.id }, function (err, data) {
