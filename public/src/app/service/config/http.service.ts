@@ -16,7 +16,7 @@ export class HttpService {
 
 
     addFeedback(text){
-        this._http.post("/feedback", {
+        return this._http.post("/feedback", {
             "text": text
         })
     }

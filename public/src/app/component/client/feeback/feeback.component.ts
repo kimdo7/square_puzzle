@@ -21,6 +21,8 @@ export class FeebackComponent implements OnInit {
 
   save(){
     let observer = this._httpService.addFeedback(this.text)
+    observer.subscribe(data => {
+    });
     this._router.navigate([""])
   }
 
