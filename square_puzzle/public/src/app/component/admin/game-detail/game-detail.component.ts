@@ -27,10 +27,19 @@ export class GameDetailComponent implements OnInit {
 
     ngOnInit() {
         this.isNew = this._router.url.match(/new$/).length != 0
-        this.newGame = { width: 2, height: 4, clicks: "" }
+        this.newGame = { width: 1, height: 1, clicks: "" }
     }
 
     onSubmit() {
+        let tempObservable = this._httpService.createGame({
+            "width" : this.newGame.width,
+            "height": this.newGame.height,
+            "clicks": this.newGame.clicks
+        })
+
+        tempObservable.subscribe(data => {
+            this._router.navigate(['/admin/gameList']);
+        });
     }
 
     _alocation(width: number, height: number) {

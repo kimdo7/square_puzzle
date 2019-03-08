@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { GameData } from 'src/app/interface/gameData';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { HttpService } from 'src/app/service/http.service';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
     selector: 'app-game-list',
@@ -15,7 +16,23 @@ export class AdminGameListComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(private _httpService: HttpService) {
+    constructor(
+        private _httpService: HttpService,
+        private location: PlatformLocation) {
+
+        this._getGames()
+
+        this.location.onPopState(() => {
+
+            console.log('pressed back!');
+
+        });
+
+
+
+    }
+
+    _getGames() {
         let tempObservable = this._httpService.getGames()
         tempObservable.subscribe(data => {
             const games = data["data"].reduce((games, game) => {
