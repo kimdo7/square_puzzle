@@ -23,7 +23,7 @@ export class GameDetailComponent implements OnInit {
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
-        private _httpService : HttpService) { }
+        private _httpService: HttpService) { }
 
     ngOnInit() {
         this.isNew = this._router.url.match(/new$/).length != 0
@@ -31,8 +31,11 @@ export class GameDetailComponent implements OnInit {
     }
 
     onSubmit() {
+        if (this.isWining())
+            return
+
         let tempObservable = this._httpService.createGame({
-            "width" : this.newGame.width,
+            "width": this.newGame.width,
             "height": this.newGame.height,
             "clicks": this.newGame.clicks
         })
@@ -52,18 +55,16 @@ export class GameDetailComponent implements OnInit {
         }
 
         var clickList = this.newGame.clicks.split(",")
-        for (var pos in clickList){
+        for (var pos in clickList) {
             if (clickList[pos] != "")
                 this._autoClicks(clickList[pos])
         }
-        // $("#body").height($(window).height() - $("#top").outerHeight() - $("#bottom").outerHeight() - 100)
-        // this.rowHeight = $("#body").height() / this.HEIGHT + "px"
     }
 
     onButtonClick(pos) {
         var temp = this.newGame.clicks.split(",")
         if (temp.includes(pos.toString())) {
-            temp = temp.reduce((arr, val) =>{
+            temp = temp.reduce((arr, val) => {
                 if (val != pos)
                     arr.push(val)
                 return arr
@@ -112,5 +113,13 @@ export class GameDetailComponent implements OnInit {
     isWidthInputValid() {
         this._alocation(this.newGame.width, this.newGame.height)
         return true
+    }
+
+    isWining() {
+        return this.map.reduce((flag, temp) => {
+            return (flag == true) ? temp.reduce((flag, temp) => {
+                return (flag == true && temp == 1) ? true : false;
+            }, flag) : false;
+        }, true)
     }
 }
