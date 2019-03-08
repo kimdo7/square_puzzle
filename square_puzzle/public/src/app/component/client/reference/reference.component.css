@@ -1,0 +1,25 @@
+h3{
+    font-size:3vw;
+}
+
+.example-card {
+    width: 80%;
+  }
+  
+  .example-header-image {
+    background-image: url('https://media.licdn.com/dms/image/C5603AQGbd4WfzxR-5Q/profile-displayphoto-shrink_200_200/0?e=1557360000&v=beta&t=jJQBHkMxsdJs8Bs1-2JLvSceDG3PVvQ3iMl77I15ac8');
+    background-size: cover;
+  }
+  a, p{
+    font-size: 1vw;
+  }
+
+  mat-card-title{
+    font-size: 2vw;
+  }
+
+  <mat-card-subtitle{
+    font-size: 1.5vw;
+  }
+  /* <mat-card-title>Kim Do</mat-card-title> */
+                    /* <mat-card-subtitle>Full Stack Developer</mat-card-subtitle> */

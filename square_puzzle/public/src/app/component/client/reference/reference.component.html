@@ -1,0 +1,116 @@
+<div class="container mt-4">
+    <div class="row form-group">
+        <div class="col">
+            <button [routerLink]="['']" mat-flat-button color="primary">Back</button>
+        </div>
+        <div class="col text-center">
+            <h3>Reference</h3>
+        </div>
+
+        <div class="col">
+        </div>
+
+
+    </div>
+
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Algorith Creator
+                </mat-panel-title>
+                <mat-panel-description>
+                    Tony Mullen
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <!-- <p>test</p> -->
+            <div>
+                <mat-card class="example-card" style="margin:auto">
+                    <mat-card-header>
+                        <mat-card-title>Tony Mullen</mat-card-title>
+                        <mat-card-subtitle>Professor in the Computer Science</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+
+                        <div class="row form-group">
+                            <div class="col-1"></div>
+                            <b class="col-2">Alogrithm: </b>
+                            <p class="col-9">Bert Bos Puzzle</p>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-1"></div>
+                            <b class="col-2">University: </b>
+                            <p class="col-9">University of Puget Sound</p>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-1"></div>
+                            <b class="col-2">Email: </b>
+                            <p class="col-9">tmullen@pugetsound.edu</p>
+                        </div>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Game Developer
+                </mat-panel-title>
+                <mat-panel-description>
+                    Kim Do
+                </mat-panel-description>
+
+            </mat-expansion-panel-header>
+
+
+
+            <mat-card class="example-card" style="margin:auto">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Kim Do</mat-card-title>
+                    <mat-card-subtitle>Full Stack Developer</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row form-group">
+                        <div class="col-1"></div>
+                        <b class="col-2">Website </b>
+                        <a class="col-9" href="https://www.kimdo7.com/">https://www.kimdo7.com/</a>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-1"></div>
+                        <b class="col-2">GitHub: </b>
+                        <a class="col-9" href="https://kimdo7.github.io/">kimdo7</a>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-1"></div>
+                        <b class="col-2">LinkedIn: </b>
+                        <a class="col-9" href="https://www.linkedin.com/in/kimdo7/">kimdo7</a>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-1"></div>
+                        <b class="col-2">Email: </b>
+                        <a class="col-9" href="mailto: dohoangkimpy@gmail.com">dohoangkimpy@gmail.com</a>
+                    </div>
+
+                    <mat-card-actions>
+                        <div class="row form-group">
+                            <div class="col-1" ></div>
+                            <a class="col-2" mat-raised-button class="btn btn-dark" href="https://www.linkedin.com/in/kimdo7/">LinkedIn</a>
+                            <a class="col-2" href mat-raised-button class="btn btn-dark" href="mailto: dohoangkimpy@gmail.com">Contact</a>
+                        </div>
+                    </mat-card-actions>
+                </mat-card-content>
+            </mat-card>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+</div>
+
+{{text}}

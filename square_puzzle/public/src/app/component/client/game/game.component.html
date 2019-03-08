@@ -31,14 +31,16 @@
 
 
 
-<div class="row ml-4 mr-4 mt-4" id="bottom">
-    <div class="col">
-        <button [routerLink]="['/gameList']" mat-flat-button color="primary">Back</button>
-    </div>
-    <div class="col text-center">
-        <button mat-flat-button color="primary" (click)="refreshPage()">Reset</button>
-    </div>
-    <div class="col text-right">
-        <button mat-flat-button color="primary">Next</button>
+<div class="mt-4" id="bottom" class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <button [routerLink]="['/gameList']" mat-flat-button color="primary">Back</button>
+        </div>
+        <div class="col text-center">
+            <button mat-flat-button color="primary" (click)="refreshPage()">Reset</button>
+        </div>
+        <div class="col text-right">
+            <button mat-flat-button color="primary">Next</button>
+        </div>
     </div>
 </div>

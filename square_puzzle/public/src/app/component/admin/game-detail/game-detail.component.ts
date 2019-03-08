@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as $ from 'jquery';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpService } from 'src/app/service/http.service';
+import { HttpService } from 'src/app/service/config/http.service';
 
 @Component({
     selector: 'app-game-detail',

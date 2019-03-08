@@ -8,6 +8,8 @@ import { AdminLoginComponent } from './component/admin/admin-login/admin-login.c
 import { GameDetailComponent } from './component/admin/game-detail/game-detail.component';
 import { AdminGameListComponent } from './component/admin/game-list/admin-game-list.component';
 import { GameListComponent } from './component/client/gameList/gameList.component';
+import { FeebackComponent } from './component/client/feeback/feeback.component';
+import { ReferenceComponent } from './component/client/reference/reference.component';
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -24,6 +26,8 @@ const routes: Routes = [
         ]
     },
     { path: "home", component: HomeComponent },
+    { path: "reference", component: ReferenceComponent },
+    { path: "feedback", component: FeebackComponent },
     { path: "gameList", component: GameListComponent },
     { path: "game/:id", component: GameComponent },
     { path: "login", component: LoginComponent },

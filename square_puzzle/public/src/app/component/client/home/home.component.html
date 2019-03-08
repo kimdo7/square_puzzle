@@ -1,9 +1,14 @@
-
-
 <div class="container">
     <h3 class="text-center mt-4 mb-4">Square Puzzle</h3>
-    <button [routerLink]="['/play']" class="text-ceter form-control form-group" mat-raised-button color color="primary">Play</button><br><br>
-    <button class="text-ceter form-control form-group" mat-raised-button color color="primary">Learn To Play</button><br><br>
-    <button class="text-ceter form-control form-group" mat-raised-button color color="primary">View Record</button><br><br>
+    <button [routerLink]="['/gameList']" class="text-ceter form-control form-group" mat-raised-button color
+        color="primary">Play</button><br><br>
+    <button class="text-ceter form-control form-group" mat-raised-button color color="primary">Learn To
+        Play</button><br><br>
+    <button [routerLink]="['admin/gameList']" class="text-ceter form-control form-group" mat-raised-button color
+        color="primary">Add a new game</button><br><br>
+    <button [routerLink]="['feedback']" class="text-ceter form-control form-group" mat-raised-button color
+        color="primary">Feeback</button><br><br>
+    <button [routerLink]="['reference']" class="text-ceter form-control form-group" mat-raised-button color
+        color="primary">Reference</button><br><br>
 
 </div>

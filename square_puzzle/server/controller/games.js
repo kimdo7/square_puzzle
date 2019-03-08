@@ -17,28 +17,40 @@ module.exports = {
     },
 
     add: function (req, res) {
-        Game.find({}, function (err, data) {
-            if (err)
+        Game.find({
+            width: req.body.width,
+            height: req.body.height,
+            clicks: req.body.clicks
+        }, function (err, data) {
+            if (err || data.length != 0)
                 res.json({ message: "Error", error: err })
-            else {
-                console.log(req.body)
-                console.log(data.length)
-                Game.create({
-                    width: req.body.width,
-                    height: req.body.height,
-                    level: data.length + 1,
-                    clicks: req.body.clicks
-                }, function (err) {
+            else
+                Game.find({}, function (err, data) {
                     if (err)
                         res.json({ message: "Error", error: err })
-                    else
-                        res.json({
-                            message: "Success",
-                            title: "Add game",
+                    else {
+                        console.log(req.body)
+                        console.log(data.length)
+                        Game.create({
+                            width: req.body.width,
+                            height: req.body.height,
+                            level: data.length + 1,
+                            clicks: req.body.clicks
+                        }, function (err) {
+                            if (err)
+                                res.json({ message: "Error", error: err })
+                            else
+                                res.json({
+                                    message: "Success",
+                                    title: "Add game",
+                                })
                         })
+                    }
                 })
-            }
         })
+
+
+
     },
 
     getByID: function (req, res) {

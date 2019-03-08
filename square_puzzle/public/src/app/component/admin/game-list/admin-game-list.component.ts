@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { GameData } from 'src/app/interface/gameData';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { HttpService } from 'src/app/service/http.service';
 import { PlatformLocation } from '@angular/common';
+import { GameData } from 'src/app/interface/model/gameData';
+import { GameDatas } from 'src/app/interface/controller/gameDatas';
+import { Location } from "@angular/common";
+import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
+import { HttpService } from 'src/app/service/config/http.service';
 
 @Component({
     selector: 'app-game-list',
@@ -16,19 +19,31 @@ export class AdminGameListComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
+
     constructor(
         private _httpService: HttpService,
-        private location: PlatformLocation) {
+        private location: PlatformLocation, private loc: Location, private router: Router) {
 
         this._getGames()
 
-        this.location.onPopState(() => {
+        router.events.subscribe( (event) => {
 
-            console.log('pressed back!');
+            if (event instanceof NavigationStart) {
+                // Show loading indicator
+                this._getGames()
+            }
 
+            if (event instanceof NavigationEnd) {
+                // Hide loading indicator
+            }
+
+            if (event instanceof NavigationError) {
+                // Hide loading indicator
+
+                // Present error to user
+                console.log(event.error);
+            }
         });
-
-
 
     }
 
@@ -36,7 +51,7 @@ export class AdminGameListComponent implements OnInit {
         let tempObservable = this._httpService.getGames()
         tempObservable.subscribe(data => {
             const games = data["data"].reduce((games, game) => {
-                games.push(createGame(game))
+                games.push(GameDatas.createGame(game))
                 return games
             }, [])
 
@@ -50,17 +65,4 @@ export class AdminGameListComponent implements OnInit {
 
     }
 
-}
-
-function createGame(object: object): GameData {
-    return {
-        level: object["number"],
-        id: object["_id"],
-        attemtped: object["attempted"],
-        solved: object["solved"],
-        best: object["best"],
-        width: object["width"],
-        height: object["height"],
-        name: object["width"] + " by " + object["height"]
-    }
 }

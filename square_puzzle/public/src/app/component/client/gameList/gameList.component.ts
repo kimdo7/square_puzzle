@@ -1,7 +1,8 @@
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpService } from 'src/app/service/http.service';
-import { GameData } from 'src/app/interface/gameData';
+import { GameData } from 'src/app/interface/model/gameData';
+import { GameDatas } from 'src/app/interface/controller/gameDatas';
+import { HttpService } from 'src/app/service/config/http.service';
 
 @Component({
     selector: 'app-play',
@@ -20,7 +21,7 @@ export class GameListComponent implements OnInit {
         let tempObservable = this._httpService.getGames()
         tempObservable.subscribe(data => {
             const games = data["data"].reduce((games, game) => {
-                games.push(createGame(game))
+                games.push(GameDatas.createGame(game))
                 return games
             }, [])
 
@@ -34,18 +35,4 @@ export class GameListComponent implements OnInit {
 
     }
 
-}
-
-/** Builds and returns a new Game. */
-function createGame(object: object): GameData {
-    return {
-        level: object["level"],
-        id: object["_id"],
-        attemtped: object["attempted"],
-        solved: object["solved"],
-        best: object["best"],
-        width: object["width"],
-        height: object["height"],
-        name: object["width"] + " by " + object["height"]
-    }
 }

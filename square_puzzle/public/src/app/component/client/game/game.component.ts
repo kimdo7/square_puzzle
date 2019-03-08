@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import * as $ from 'jquery';
-import { HttpService } from 'src/app/service/http.service';
-import { GameData } from 'src/app/interface/gameData';
+import { GameData } from 'src/app/interface/model/gameData';
+import { GameDatas } from 'src/app/interface/controller/gameDatas';
+import { HttpService } from 'src/app/service/config/http.service';
 
 @Component({
     selector: 'app-game',
@@ -13,15 +14,18 @@ export class GameComponent implements OnInit {
 
     public WIDTH = 3
     public HEIGHT = 1
-    public gameObj: GameData = createDefaultGame()
+    public gameObj: GameData
     public map = []
     public rowHeight = ""
     public clicks = 0
 
-    constructor(private _route: ActivatedRoute, private _httpService: HttpService) {
+    constructor(
+        private _route: ActivatedRoute,
+        private _httpService: HttpService) {
     }
 
     ngOnInit() {
+        this.gameObj = GameDatas.createDefaultGame()
         this._route.params.subscribe((params: Params) => {
             this._getGame(params["id"])
         })
@@ -30,7 +34,7 @@ export class GameComponent implements OnInit {
     _getGame(id) {
         let tempObservable = this._httpService.getGame(id)
         tempObservable.subscribe(data => {
-            this.gameObj = createGame(data["data"][0])
+            this.gameObj = GameDatas.createGame(data["data"][0])
             this._alocation(this.gameObj.width, this.gameObj.height)
         });
     }
@@ -83,7 +87,7 @@ export class GameComponent implements OnInit {
             alert("Congrats, Let's move on the next challenge!!!")
             let tempObservable = this._httpService.solvedGame(this.gameObj.id, this.clicks)
             tempObservable.subscribe(data => {
-                this.gameObj = createGame(data["data"][0])
+                this.gameObj = GameDatas.createGame(data["data"][0])
             });
         }
     }
@@ -107,28 +111,16 @@ export class GameComponent implements OnInit {
 
 }
 
-function createGame(object: object): GameData {
-    return {
-        level: object["number"],
-        id: object["_id"],
-        attemtped: object["attempted"],
-        solved: object["solved"],
-        best: object["best"],
-        width: object["width"],
-        height: object["height"],
-        name: object["width"] + " by " + object["height"]
-    }
-}
+// function createGame(object: object): GameData {
+//     return {
+//         level: object["number"],
+//         id: object["_id"],
+//         attemtped: object["attempted"],
+//         solved: object["solved"],
+//         best: object["best"],
+//         width: object["width"],
+//         height: object["height"],
+//         name: object["width"] + " by " + object["height"]
+//     }
+// }
 
-function createDefaultGame(): GameData {
-    return {
-        level: 0,
-        id: "",
-        attemtped: 0,
-        solved: 0,
-        best: 0,
-        width: 0,
-        height: 0,
-        name: ""
-    }
-}
