@@ -1,5 +1,6 @@
 var path = require('path');
 var games = require("./../controller/games")
+var feedbacks = require("./../controller/feebacks")
 
 module.exports = function (app) {
     app.get("/games", function (req, res) {
@@ -22,6 +23,16 @@ module.exports = function (app) {
         games.add(req, res)
     })
 
+
+    //********************FEEDBACK */
+
+    app.get("/feedbacks", function(req, res){
+        feedbacks.getAll(req, res)
+    })
+
+    app.post("/feedback", function(req, res){
+        feedbacks.add(req, res)
+    })
 
     // this route will be triggered if any of the routes above did not match
     app.all("*", (req, res, next) => {
