@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './materials';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './component/client/home/home.component';
+import { HomeComponent, BottomSheetShareToFriend } from './component/client/home/home.component';
 import { GameComponent } from './component/client/game/game.component';
 import { LoginComponent } from './component/client/login/login.component';
 import {
@@ -23,6 +23,7 @@ import { FeebackComponent } from './component/client/feeback/feeback.component';
 import { ReferenceComponent } from './component/client/reference/reference.component';
 import { HttpService } from './service/config/http.service';
 import { getAuthServiceConfigs } from './service/config/socialloginConfig';
+import { GameWinningDialog } from './component/client/game/dialog/game-winning-dialog';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,8 @@ import { getAuthServiceConfigs } from './service/config/socialloginConfig';
         AdminLoginComponent,
         FeebackComponent,
         ReferenceComponent,
+        BottomSheetShareToFriend,
+        GameWinningDialog
     ],
     imports: [
         BrowserModule,
@@ -54,6 +57,8 @@ import { getAuthServiceConfigs } from './service/config/socialloginConfig';
             useFactory: getAuthServiceConfigs
         }
     ],
+
+    entryComponents: [HomeComponent, BottomSheetShareToFriend, GameComponent, GameWinningDialog],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

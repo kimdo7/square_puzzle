@@ -5,6 +5,7 @@ import { GameData } from 'src/app/interface/model/gameData';
 import { GameDatas } from 'src/app/interface/controller/gameDatas';
 import { HttpService } from 'src/app/service/config/http.service';
 import { MatDialog } from '@angular/material';
+import { GameWinningDialog } from './dialog/game-winning-dialog';
 
 @Component({
     selector: 'app-game',
@@ -118,7 +119,8 @@ export class GameComponent implements OnInit {
 
         if (this.isWining()) {
             // alert("Congrats, Let's move on the next challenge!!!")
-            $("#congrats_modal").click()
+            // $("#congrats_modal").click()
+            this.openDialog()
             let tempObservable = this._httpService.solvedGame(this.gameObj.id, this.clicks)
             tempObservable.subscribe(data => {
                 this.gameObj = GameDatas.createGame(data["data"][0])
@@ -152,15 +154,15 @@ export class GameComponent implements OnInit {
         });
     }
 
-    nextModal(){
-        $("#closeModal").click()
-        this.next()
-    }
+    openDialog(): void {
+        const dialogRef = this.dialog.open(GameWinningDialog, {
+            width: '50%',
+            data: { level: this.gameObj.level }
+        });
 
-    open() {
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-        })
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed', result);
+        });
     }
 
 }
