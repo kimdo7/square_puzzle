@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import { GameData } from 'src/app/interface/model/gameData';
 import { GameDatas } from 'src/app/interface/controller/gameDatas';
 import { HttpService } from 'src/app/service/config/http.service';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'app-game',
@@ -22,7 +23,8 @@ export class GameComponent implements OnInit {
     constructor(
         private _route: ActivatedRoute,
         private _httpService: HttpService,
-        private _router: Router) {
+        private _router: Router,
+        public dialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -115,7 +117,8 @@ export class GameComponent implements OnInit {
         this.clicks++
 
         if (this.isWining()) {
-            alert("Congrats, Let's move on the next challenge!!!")
+            // alert("Congrats, Let's move on the next challenge!!!")
+            $("#congrats_modal").click()
             let tempObservable = this._httpService.solvedGame(this.gameObj.id, this.clicks)
             tempObservable.subscribe(data => {
                 this.gameObj = GameDatas.createGame(data["data"][0])
@@ -147,6 +150,17 @@ export class GameComponent implements OnInit {
                 this._router.navigate(["/game", data["data"][0]["_id"]])
             }
         });
+    }
+
+    nextModal(){
+        $("#closeModal").click()
+        this.next()
+    }
+
+    open() {
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
     }
 
 }

@@ -18,18 +18,12 @@
     <mat-grid-list [cols]="WIDTH" class="container" [rowHeight]="rowHeight">
         <div *ngFor="let horizontal of map; let i = index">
             <div *ngFor="let vertical of horizontal; let j = index">
-                <mat-grid-tile 
-                matRipple
-                color = "red"
-                *ngIf="vertical == 0" class="form-control bg-primary"
+                <mat-grid-tile matRipple color="red" *ngIf="vertical == 0" class="form-control bg-primary"
                     (click)="onButtonClick((i * horizontal.length) + j)">
                 </mat-grid-tile>
 
 
-                <mat-grid-tile 
-                matRipple
-                color = "blue"
-                *ngIf="vertical == 1" class="form-control bg-danger"
+                <mat-grid-tile matRipple color="blue" *ngIf="vertical == 1" class="form-control bg-danger"
                     (click)="onButtonClick((i * horizontal.length) + j)">
                 </mat-grid-tile>
             </div>
@@ -49,6 +43,32 @@
         </div>
         <div class="col text-right">
             <button (click)="next()" mat-flat-button color="primary">Next</button>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#exampleModalCenter" id ="congrats_modal">
+    Launch demo modal
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">You Won</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Let's move on the next challenge!!!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal">Close</button>
+                <button (click)="nextModal()" type="button" class="btn btn-primary">Next</button>
+            </div>
         </div>
     </div>
 </div>
