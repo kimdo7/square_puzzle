@@ -24,6 +24,8 @@ import { ReferenceComponent } from './component/client/reference/reference.compo
 import { HttpService } from './service/config/http.service';
 import { getAuthServiceConfigs } from './service/config/socialloginConfig';
 import { GameWinningDialog } from './component/client/game/dialog/game-winning-dialog';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -48,7 +50,8 @@ import { GameWinningDialog } from './component/client/game/dialog/game-winning-d
         MaterialModule,
         HttpClientModule,
         SocialLoginModule,
-        FormsModule
+        FormsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [
         HttpService,

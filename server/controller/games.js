@@ -29,8 +29,6 @@ module.exports = {
                     if (err)
                         res.json({ message: "Error", error: err })
                     else {
-                        console.log(req.body)
-                        console.log(data.length)
                         Game.create({
                             width: req.body.width,
                             height: req.body.height,
@@ -78,7 +76,6 @@ module.exports = {
     },
 
     getByLevel: function (req, res) {
-        console.log(req.body.level)
         Game.find({ level: req.body.level }, function (err, data) {
             if (err)
                 res.json({ message: "Error", error: err })
@@ -103,7 +100,6 @@ module.exports = {
     },
 
     solvedById: function (req, res) {
-
         Game.find({ _id: req.params.id }, function (err, data) {
             if (err)
                 res.json({ message: "Error", error: err })
